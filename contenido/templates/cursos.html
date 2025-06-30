@@ -1,0 +1,20 @@
+{% extends 'encabezado.html' %}
+{% block titulo %}Lista de Cursos{% endblock %}
+{% block contenido %}
+<h2>Lista de Cursos</h2>
+<div class="row">
+    {% for curso in cursos %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <img src="{{ curso.imagen.url }}" class="card-img-top" alt="{{ curso.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ curso.nombre }}</h5>
+                <p class="card-text">{{ curso.descripcion|truncatewords:20 }}</p>
+                <p class="card-text"><strong>Precio:</strong> ${{ curso.precio }}</p>
+                <p class="card-text"><strong>Nivel:</strong> {{ curso.categoria }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

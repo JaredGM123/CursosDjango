@@ -1,0 +1,29 @@
+{% extends 'encabezado.html' %}
+{% block titulo %}Contacto{% endblock %}
+
+{% block contenido %}
+<h1 class="mb-4">Formulario de Contacto</h1>
+
+<div class="card">
+  <form>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required />
+
+    <label for="correo">Correo Electrónico:</label>
+    <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required />
+
+    <label for="curso">Curso de interés:</label>
+    <select id="curso" name="curso">
+      <option>Base de Datos</option>
+      <option>Programación</option>
+      <option>Redes</option>
+      <option>Desarrollo Web</option>
+    </select>
+
+    <label for="comentarios">Comentarios:</label>
+    <textarea id="comentarios" name="comentarios" placeholder="Ingresa tus comentarios" rows="4"></textarea>
+
+    <button type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
+  </form>
+</div>
+{% endblock %}

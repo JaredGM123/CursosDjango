@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{% block titulo %}{% endblock %}</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="{% static 'inicio/css/nuevo_estilo.css' %}" rel="stylesheet" />
+</head>
+<body>
+
+<button class="hamburger" aria-label="Abrir menú" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</button>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-content">
+    <ul class="navigation">
+      <li><a href="{% url 'Principal' %}"><i class="fas fa-home"></i><span> Inicio</span></a></li>
+      <li><a href="{% url 'Formulario' %}"><i class="fas fa-graduation-cap"></i><span> Cursos</span></a></li>
+      <li><a href="{% url 'Contacto' %}"><i class="fas fa-envelope"></i><span> Contacto</span></a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="main-content">
+  {% block contenido %}{% endblock %}
+</div>
+
+<script>
+  function toggleMenu() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('show');
+  }
+</script>
+</body>
+</html>
