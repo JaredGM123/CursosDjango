@@ -1,0 +1,34 @@
+{% extends 'encabezado.html' %}
+
+{% block titulo %}Cursos Disponibles{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Lista de Cursos</h2>
+        <a href="{% url 'crear_curso' %}" class="btn btn-success">Crear Curso</a>
+    </div>
+
+    <div class="row">
+        {% for curso in cursos %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                {% if curso.imagen %}
+                <img src="{{ curso.imagen.url }}" class="card-img-top" style="max-height: 200px; object-fit: cover;" alt="{{ curso.titulo }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ curso.titulo }}</h5>
+                    <p class="card-text">{{ curso.descripcion|truncatewords:20 }}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'editar_curso' curso.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'eliminar_curso' curso.id %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este curso?')">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay cursos disponibles.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

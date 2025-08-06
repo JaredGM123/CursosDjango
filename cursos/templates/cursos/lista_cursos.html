@@ -1,0 +1,65 @@
+{% extends 'encabezado.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Listado de Cursos</h1>
+        <a href="{% url 'crear_curso' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nuevo Curso
+        </a>
+    </div>
+
+    {% if cursos %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Título</th>
+                    <th>Nivel</th>
+                    <th>Fecha Inicio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curso in cursos %}
+                <tr>
+                    <td>
+                        <a href="{% url 'detalle_curso' curso.id %}">
+                            {{ curso.titulo }}
+                        </a>
+                    </td>
+                    <td>{{ curso.get_nivel_display }}</td>
+                    <td>{{ curso.fecha_inicio|date:"d/m/Y"|default:"-" }}</td>
+                    <td>
+                        <span class="badge bg-{% if curso.activo %}success{% else %}secondary{% endif %}">
+                            {% if curso.activo %}Activo{% else %}Inactivo{% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{% url 'editar_curso' curso.id %}" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{% url 'eliminar_curso' curso.id %}" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        No hay cursos registrados.
+    </div>
+    {% endif %}
+
+    <div class="mt-4 text-muted small">
+        <strong>T2 / D.0.1:</strong> http://jcursos/ctsau/
+    </div>
+</div>
+{% endblock %}
